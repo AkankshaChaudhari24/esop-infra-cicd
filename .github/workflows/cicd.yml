@@ -141,9 +141,9 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{needs.terraformEC2.outputs.public_ip}}
         run: |
-                    eval `ssh-agent`
-                    echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-                    echo "$SSH_HOST"
+          eval `ssh-agent`
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+          echo "$SSH_HOST"
           ssh-add - <<< "${SSH_PRIVATE_KEY}"
           scp -o StrictHostKeyChecking=no "esop/deploy.sh" ec2-user@$SSH_HOST:~
           scp -o StrictHostKeyChecking=no "esop-0.1-all.jar" ec2-user@$SSH_HOST:~
