@@ -132,6 +132,8 @@ jobs:
     needs: [ "terraformEC2", "build" ]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Download jar file
         uses: actions/download-artifact@v3
         with:
