@@ -135,7 +135,7 @@ jobs:
       - name: Download jar file
         uses: actions/download-artifact@v3
         with:
-          name: esop-trading-1.0
+         name: esop-trading-1.0
       - name: SSH into the instance
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
