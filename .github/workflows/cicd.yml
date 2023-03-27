@@ -135,7 +135,7 @@ jobs:
       - name: Download jar file
         uses: actions/download-artifact@v3
         with:
-          name: esop-trading-1.0
+         name: esop-trading-1.0
       - name: SSH into the instance
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -152,7 +152,6 @@ jobs:
           echo "$SSH_HOST"
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
           ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo yum install java-17-amazon-corretto-headless -y"
-          scp -T -o StrictHostKeyChecking=no "esop-0.1-all.jar" ec2-user@$SSH_HOST:~
           scp -T -o StrictHostKeyChecking=no "esop-0.1-all.jar" ec2-user@$SSH_HOST:~
           #!/bin/bash
           pid=$(sudo lsof -n -i :80 -sTCP:LISTEN -t)
