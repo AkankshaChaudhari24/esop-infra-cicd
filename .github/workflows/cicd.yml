@@ -129,7 +129,7 @@ jobs:
           path: build/libs/esop-0.1-all.jar
 
   deploy:
-    needs: ["terraformEC2", "build"]
+    needs: [ "terraformEC2", "build" ]
     runs-on: ubuntu-latest
     steps:
       - name: Download jar file
@@ -142,26 +142,26 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{needs.terraformEC2.outputs.public_ip}}
         run: |
-#          eval `ssh-agent`
-#          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-#          scp -T -o StrictHostKeyChecking=no "esop-0.1-all.jar" ec2-user@$SSH_HOST:~
-#          ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo yum install java-17-amazon-corretto-headless -y"
-#          ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo fuser -k 80/tcp"
-#          ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo MICRONAUT_SERVER_PORT=80 java -jar esop-0.1-all.jar >/dev/null &"
-
-          eval `ssh-agent`
-          echo "$SSH_HOST"
-          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-          ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo yum install java-17-amazon-corretto-headless -y"
-          scp -T -o StrictHostKeyChecking=no "esop-0.1-all.jar" ec2-user@$SSH_HOST:~
+          #          eval `ssh-agent`
+          #          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+          #          scp -T -o StrictHostKeyChecking=no "esop-0.1-all.jar" ec2-user@$SSH_HOST:~
+          #          ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo yum install java-17-amazon-corretto-headless -y"
+          #          ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo fuser -k 80/tcp"
+          #          ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo MICRONAUT_SERVER_PORT=80 java -jar esop-0.1-all.jar >/dev/null &"
+          
+               eval `ssh-agent`
+               echo "$SSH_HOST"
+               echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+               ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo yum install java-17-amazon-corretto-headless -y"
+               scp -T -o StrictHostKeyChecking=no "esop-0.1-all.jar" ec2-user@$SSH_HOST:~
           #!/bin/bash
-          pid=$(sudo lsof -n -i :80 -sTCP:LISTEN -t)
-
-          if [ -n "$pid" ]; then
-            sudo kill "$pid"
-
-          ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo MICRONAUT_SERVER_PORT=80 java -jar esop-0.1-all.jar >/dev/null &"
-          exit
+               pid=$(sudo lsof -n -i :80 -sTCP:LISTEN -t)
+          
+               if [ -n "$pid" ]; then
+               sudo kill "$pid"
+          
+               ssh -T -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "sudo MICRONAUT_SERVER_PORT=80 java -jar esop-0.1-all.jar >/dev/null &"
+               exit
           
           
           
