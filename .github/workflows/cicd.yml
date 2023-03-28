@@ -52,12 +52,13 @@ jobs:
           workflow_conclusion: ""
           name: ipAddress
       - name: Store ipAddress in output
+        id: ip_address
         run : |
-          echo IPAddress=$(cat ipAddress.txt)
+          echo IPAddress=$(cat ipAddress.txt) >>$GITHUB_OUTPUT
       - name: SSH into the instance
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: $IPAddress
+          SSH_HOST: ${{steps.ip_address.output}}
         run: |
           eval `ssh-agent`
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
