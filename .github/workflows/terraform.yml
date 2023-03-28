@@ -106,3 +106,7 @@ jobs:
         with:
           name: ipAddress
           path: Terraform/ec2/ipAddress.txt
+      - name: Download ipAddress.txt file
+        uses: actions/download-artifact@v3
+        with:
+          name: ipAddress
