@@ -101,7 +101,7 @@ jobs:
            cd Terraform
            cd ec2
            cat ipAddress.txt
-      - name: Copy jar file to artifacts
+      - name: Copy ipAddress file to artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ipAdress
