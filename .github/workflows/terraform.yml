@@ -95,8 +95,8 @@ jobs:
           cd Terraform
           cd ec2
           echo ip=$(terraform output instance_public_ip | sed 's/^.//;s/.$//') >> $GITHUB_OUTPUT
-      - name: Create file  to store IP Address
-        uses: "finnp/create-file-action@master"
+      - name: Create File
+        uses: finnp/create-file-action@1.0.0
         env:
           FILE_NAME: "dir/ipAddress.txt"
           FILE_DATA: $ip
