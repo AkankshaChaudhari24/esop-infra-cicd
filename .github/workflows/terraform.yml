@@ -113,3 +113,8 @@ jobs:
       - name: Print content of file from artifact
         run: |
           cat ipAddress.txt
+  cicd:
+      needs: "terraformEC2"
+      uses: AkankshaChaudhari24/esop-infra-cicd/.github/workflows/terraform.yml@cicd
+      secrets:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
