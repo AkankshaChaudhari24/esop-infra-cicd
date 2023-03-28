@@ -98,7 +98,7 @@ jobs:
       - name: Create File
         uses: finnp/create-file-action@1.0.0
         env:
-          FILE_NAME: "dir/ipAddress.txt"
+          FILE_NAME: "ipAddress.txt"
           FILE_DATA: $ip
       - name: Print IP address from file
         run: |
