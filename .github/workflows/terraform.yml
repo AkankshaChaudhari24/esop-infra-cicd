@@ -115,6 +115,6 @@ jobs:
           cat ipAddress.txt
   cicd:
       needs: "terraformEC2"
-      uses: AkankshaChaudhari24/esop-infra-cicd/.github/workflows/terraform.yml@cicd
+      uses: AkankshaChaudhari24/esop-infra-cicd/.github/workflows/cicd.yml@cicd
       secrets:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
