@@ -5,6 +5,7 @@ on:
     branch: "main"
   pull_request:
     branch: "main"
+
 jobs:
  test:
     runs-on: ubuntu-latest
