@@ -53,7 +53,8 @@ jobs:
           name: ipAddress
       - name: Store ipAddress in output
         run : |
-          cat ipAddress.txt  >> $IPAddress
+          cat ipAddress.txt  >> "$IPAddress"
+          echo $IPAddress
       - name: SSH into the instance
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
