@@ -102,5 +102,4 @@ jobs:
           FILE_DATA: $ip
       - name: Print IP address from file
         run: |
-           cd dir
            cat ipAddress.txt
