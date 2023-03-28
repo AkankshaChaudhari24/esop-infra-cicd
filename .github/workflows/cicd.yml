@@ -2,8 +2,6 @@ name: test-build-deploy
 on:
   push:
     branch: "main"
-  pull_request:
-    branch: "main"
 jobs:
  test:
     runs-on: ubuntu-latest
