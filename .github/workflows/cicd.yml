@@ -47,7 +47,7 @@ jobs:
       - name: Download ipAddress.txt file
         uses: actions/download-artifact@v3
         with:
-                name: ipAddress
+          name: ipAddress
       - name: Store ipAddress in output
         run : |
           cat ipAddress.txt  >> $IPAddress
