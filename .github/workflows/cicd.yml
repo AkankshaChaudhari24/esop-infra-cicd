@@ -58,7 +58,7 @@ jobs:
       - name: SSH into the instance
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{steps.ip_address.output}}
+          SSH_HOST: ${{steps.ip_address.outputs}}
         run: |
           eval `ssh-agent`
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
