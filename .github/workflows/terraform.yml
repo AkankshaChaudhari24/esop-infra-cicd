@@ -95,7 +95,7 @@ jobs:
           cd Terraform
           cd ec2
           touch ipAddress.txt
-          echo ip=$(terraform output instance_public_ip | sed 's/^.//;s/.$//') >> ipAddress.txt
+          echo $(terraform output instance_public_ip | sed 's/^.//;s/.$//') >> ipAddress.txt
       - name: Print IP address from file
         run: |
            cd Terraform
