@@ -2,9 +2,9 @@ name: test-build-deploy
 
 on:
   push:
-    branch: "main"
+    branch: "infra"
   pull_request:
-    branch: "main"
+    branch: "infra"
 
 jobs:
   terraformS3:
@@ -96,70 +96,9 @@ jobs:
           cd Terraform
           cd ec2  
           echo ip=$(terraform output instance_public_ip | sed 's/^.//;s/.$//') >> $GITHUB_OUTPUT
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup java
-        uses: actions/setup-java@v3
-        with:
-          distribution: corretto
-          java-version: 17
-      - name: Test
-        run: ./gradlew test
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup java
-        uses: actions/setup-java@v3
-        with:
-          distribution: corretto
-          java-version: 17
-      - name: Build
-        run: ./gradlew build
-      - name: Copy jar file to artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: esop-trading-1.0
-          path: build/libs/esop-0.1-all.jar
-
-  deploy:
-    needs: [ "terraformEC2", "build" ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Download jar file
-        uses: actions/download-artifact@v3
-        with:
-          name: esop-trading-1.0
-      - name: SSH into the instance
+      - name: Create file  to store IP Address
+      - uses: "finnp/create-file-action@master"
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{needs.terraformEC2.outputs.public_ip}}
-        run: |
-          eval `ssh-agent`
-          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-          echo "$SSH_HOST"
-          ssh-add - <<< "${SSH_PRIVATE_KEY}"
-          scp -o StrictHostKeyChecking=no "deploy.sh" ec2-user@$SSH_HOST:~
-          scp -o StrictHostKeyChecking=no "esop-0.1-all.jar" ec2-user@$SSH_HOST:~
-          ssh -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "nohup sudo yum install java-17-amazon-corretto-headless -y"
-          ssh -o StrictHostKeyChecking=no ec2-user@$SSH_HOST -t "nohup sudo sh deploy.sh"
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+        FILE_NAME: "dir/ipAddress.txt"
+        FILE_DATA: $ip
+
