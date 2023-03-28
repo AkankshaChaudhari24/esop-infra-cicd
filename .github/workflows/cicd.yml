@@ -35,7 +35,7 @@ jobs:
            path: build/libs/esop-0.1-all.jar
 
   deploy:
-    needs: [ "terraformEC2", "build" ]
+    needs:  "build"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
