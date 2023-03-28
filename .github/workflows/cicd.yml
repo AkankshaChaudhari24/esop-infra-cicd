@@ -51,12 +51,7 @@ jobs:
         with:
           name: esop-trading-1.0
       - name: Download artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: terraform.yml
-          branch: infra
-          workflow_conclusion: ""
-          name: ipAddress
+        uses: action/download-artifact@v3
       - name: Store ipAddress in output
         id: ip_address
         run : |
