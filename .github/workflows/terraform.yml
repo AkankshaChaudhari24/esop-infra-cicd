@@ -1,4 +1,4 @@
-name: test-build-deploy
+name: s3-ec2-infra
 
 on:
   push:
@@ -104,5 +104,5 @@ jobs:
       - name: Copy ipAddress file to artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ipAdress
+          name: ipAddress
           path: Terraform/ec2/ipAddress.txt
