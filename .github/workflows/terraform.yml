@@ -85,8 +85,7 @@ jobs:
         run: |
           cd Terraform
           cd ec2
-          terraform apply -auto-approve   
-
+          terraform apply -auto-approve
       - name: Export IP Address to environment variable
         id: ip_address
         env:
@@ -94,10 +93,13 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           cd Terraform
-          cd ec2  
+          cd ec2
           echo ip=$(terraform output instance_public_ip | sed 's/^.//;s/.$//') >> $GITHUB_OUTPUT
       - name: Create file  to store IP Address
         uses: "finnp/create-file-action@master"
-          env:
-            FILE_NAME: "dir/ipAddress.txt"
-            FILE_DATA: $ip
+        env:
+          FILE_NAME: "dir/ipAddress.txt"
+          FILE_DATA: $ip
+        run: |
+           cd dir
+           cat ipAddress.txt
