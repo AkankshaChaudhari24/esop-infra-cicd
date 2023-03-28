@@ -110,3 +110,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ipAddress
+      - name: Print content of file from artifact
+        run: |
+          cat ipAddress.txt
