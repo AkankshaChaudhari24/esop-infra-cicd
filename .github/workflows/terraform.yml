@@ -89,7 +89,7 @@ jobs:
            cd ec2
            cat ipAddress.txt
   moveFileToS3:
-    needs: ["terraformS3","terraformEC2"]
+    needs: "terraformEC2"
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS Credentials
