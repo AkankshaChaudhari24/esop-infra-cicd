@@ -9,7 +9,7 @@ on:
       SSH_PRIVATE_KEY:
         required: true
 jobs:
-  test:
+  test-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,7 +30,7 @@ jobs:
            path: build/libs/esop-0.1-all.jar
 
   deploy:
-    needs:  "build"
+    needs:  "test-build"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
