@@ -50,12 +50,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: esop-trading-1.0
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-      - name: Store ipAddress in output
-        id: ip_address
-        run : |
-          echo IPAddress=$(cat ipAddress.txt) >>$GITHUB_OUTPUT
       - name: SSH into the instance
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
