@@ -34,7 +34,6 @@ jobs:
           cd ec2
           terraform plan
   terraform-apply:
-    needs: "terraform-plan"
     runs-on: ubuntu-latest
     environment: prod
     outputs:
