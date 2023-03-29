@@ -95,4 +95,5 @@ jobs:
           cat ipAddress.txt
           mkdir ip
           mv ipAddress.txt ip
-          aws s3 sync . s3://akanksha-tf-gurukul/ipAddress.txt
+          cd ip
+          aws s3 sync . s3://akanksha-tf-gurukul
