@@ -98,5 +98,5 @@ jobs:
         run: |
           cd Terraform
           cd ec2
-          cat ipAdress.txt
+          cat ipAddress.txt
           aws s3 mv ipAddress.txt s3://akanksha-tf-gurukul
