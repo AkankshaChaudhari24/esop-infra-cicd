@@ -95,10 +95,9 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      -name: Move ipAddress file to S3 bucket
-       run: |
+      - name: Move ipAddress file to S3 bucket
+        run: |
           cd Terraform
           cd ec2
           cat ipAdress.txt
           aws s3 mv ipAddress.txt s3://akanksha-tf-gurukul
-
