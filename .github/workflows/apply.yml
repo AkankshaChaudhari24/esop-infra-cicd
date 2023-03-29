@@ -1,4 +1,0 @@
-name: s3-ec2-infra-apply
-
-on:
-  workflow_dispatch:
