@@ -93,4 +93,4 @@ jobs:
           cd Terraform
           cd ec2
           cat ipAddress.txt
-          aws s3 cp ipAddress.txt s3://akanksha-tf-gurukul
+          aws s3 sync . s3://akanksha-tf-gurukul/ipAddress.txt
