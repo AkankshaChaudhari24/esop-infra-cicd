@@ -85,6 +85,11 @@ jobs:
   moveFileToS3:
     needs: "terraformEC2"
     runs-on: ubuntu-latest
+
+    defaults:
+          run:
+            shell: bash
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
