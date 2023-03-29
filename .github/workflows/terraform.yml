@@ -1,4 +1,4 @@
-name: s3-ec2-infr
+name: s3-ec2-infra
 
 on:
   push:
@@ -46,13 +46,15 @@ jobs:
         id: checkout
         uses: actions/checkout@v3
       - name: Terraform Init
-        id: terraform_init
-        run: cd terraform/aws_instance; terraform init
+        run: |
+              cd Terraform
+              cd ec2
+              terraform init
       - name: Terraform Apply
         run: |
-                cd Terraform
-                cd ec2
-                terraform apply -auto-approve
+               cd Terraform
+               cd ec2
+               terraform apply -auto-approve
       - name: Create file to store IP Address
         id: ip_address
         run: |
